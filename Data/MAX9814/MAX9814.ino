@@ -1,3 +1,5 @@
+// This is a testing code for the MAX9814 sound sensor using Arduino MKR WIFI 1010 board.
+
 const int soundPin = A0;
 const int MIN_SOUND = 1380;  // Quiet baseline
 const int MAX_SOUND = 1800;  // Loud sounds
@@ -20,5 +22,5 @@ void loop() {
   // Print only the dB value for Serial Plotter
   Serial.println(dB_SPL);
   
-  delay(50);  // Faster update for smoother plotting
+  delay(50);
 }
