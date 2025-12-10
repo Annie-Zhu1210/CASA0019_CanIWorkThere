@@ -141,16 +141,20 @@ void mqttCallback(char* topic, byte* payload, unsigned int length) {
 }
 
 void updateServo(float dB) {
-  // Map 30-90 dB to 0-270 degrees
-  int angle = map(dB * 10, 300, 900, 0, 270);
-  angle = constrain(angle, 0, 270);
+  // Map 30-90 dB to 0-270 degrees for the pointer
+  int servoAngle = map(dB * 10, 300, 900, 0, 135);
+  servoAngle = constrain(servoAngle, 0, 135);
   
-  gaugeServo.write(angle);
+  gaugeServo.write(servoAngle);
+  
+  int pointerAngle = servoAngle * 2;
   
   Serial.print("Sound Level: ");
   Serial.print(dB);
-  Serial.print(" dB → Servo angle: ");
-  Serial.print(angle);
+  Serial.print(" dB → Servo: ");
+  Serial.print(servoAngle);
+  Serial.print("° → Pointer: ");
+  Serial.print(pointerAngle);
   Serial.println("°");
 }
 
