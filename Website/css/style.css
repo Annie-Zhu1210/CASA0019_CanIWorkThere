@@ -47,18 +47,13 @@ body {
 
 .media {
     display: grid;
-    grid-template-rows: 3fr 2fr;
-    padding: 4px;
-    gap: 5px;
-    align-items: center;
+    row-gap: 15px;
 }
-
 .footer {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 10px;
     background-color: #ffe8a4;
-    /* Mint Green */
     color: #000;
 }
 
@@ -76,7 +71,7 @@ video {
 
 a {
     font-weight: bold;
-    color: #ffffff;
+    color: #363535;
 }
 
 .title_content {
@@ -84,4 +79,11 @@ a {
     font-weight: bold;
     margin-bottom: 15px;
     display: block;
+}
+
+.media img,
+.media video {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
 }
