@@ -279,57 +279,135 @@ private:
 public:
     String detectDeviceType(const String& mac, int rssi) const {
         String vendor = getVendorFromMAC(mac);
-        
+
+        // Apple: keep your existing custom logic
         if (vendor == "Apple") {
-            // Apple devices could be iPhone, MacBook, iPad, etc.
             return guessAppleDeviceType(mac, rssi);
-        } else if (vendor != "Unknown") {
+        }
+
+        // Huawei: phone vs laptop/tablet heuristic
+        if (vendor == "HUAWEI") {
+            return guessHuaweiDeviceType(mac, rssi);
+        }
+
+        // Laptops/PCs “normally”
+        if (isLikelyLaptopVendor(vendor)) {
+            return vendor + " Laptop/PC";
+        }
+
+        // Routers/APs/gateways
+        if (isLikelyNetworkInfraVendor(vendor)) {
+            return vendor + " Router/AP";
+        }
+
+        // Android phone brands
+        if (isLikelyPhoneVendor(vendor)) {
+            return vendor + " Phone";
+        }
+
+        // IoT/embedded/modules
+        if (isLikelyIoTVendor(vendor)) {
+            return vendor + " IoT/Embedded";
+        }
+
+        if (vendor != "Unknown") {
             return vendor + " Device";
         }
-        
-        // Guess based on signal characteristics
+
         return guessBySignalCharacteristics(mac, rssi);
     }
 
     String getVendorFromMAC(const String& mac) const {
-        String prefix = mac.substring(0, 8);
-        for (const auto& vendor : macVendors) {
-            if (prefix.startsWith(vendor.first)) {
-                return vendor.second;
+        String norm = normalizeMac(mac);
+        if (norm.length() < 8) return "Unknown";
+
+        String prefix = norm.substring(0, 8); // "AA:BB:CC"
+
+        // Fast exact lookup (recommended)
+        auto it = macVendors.find(prefix);
+        if (it != macVendors.end()) return trimVendor(it->second);
+
+        // Fallback scan (still works if you later change container/keys)
+        for (const auto& kv : macVendors) {
+            if (prefix == normalizePrefix(kv.first)) {
+                return trimVendor(kv.second);
             }
         }
         return "Unknown";
     }
 
+    // keep public if EnhancedPeopleCounter wants to call it
     String guessAppleDeviceType(const String& mac, int rssi) const {
-        // Simple classification logic for Apple devices
         int macSuffix = getMacSuffix(mac);
-        
-        // iPhones typically have stronger mobility characteristics
-        if (rssi > -45 && macSuffix % 2 == 0) {
-            return "Apple iPhone";
-        } else if (rssi > -50) {
-            return "Apple MacBook";
-        } else {
-            return "Apple Device";
-        }
-    }
 
-    String guessBySignalCharacteristics(const String& mac, int rssi) const {
-        // Guess based on signal characteristics
-        if (rssi > -40) {
-            return "Likely Computer (Strong Signal)";
-        } else if (rssi > -55) {
-            return "Possible Phone (Medium Signal)";
-        } else {
-            return "Mobile Device (Weak Signal)";
-        }
+        if (rssi > -45 && macSuffix % 2 == 0) return "Apple iPhone";
+        if (rssi > -50) return "Apple MacBook";
+        return "Apple Device";
     }
 
 private:
+    // ---- New Huawei logic ----
+    String guessHuaweiDeviceType(const String& mac, int rssi) const {
+        // Very approximate. Tune thresholds for your room.
+        if (rssi > -45) return "HUAWEI Phone (near)";
+        if (rssi > -55) return "HUAWEI Phone (likely)";
+        if (rssi > -65) return "HUAWEI Laptop/Tablet (possible)";
+        return "HUAWEI Device";
+    }
+
+    // ---- Existing fallback ----
+    String guessBySignalCharacteristics(const String& mac, int rssi) const {
+        if (rssi > -40) return "Likely Computer (Strong Signal)";
+        if (rssi > -55) return "Possible Phone (Medium Signal)";
+        return "Mobile Device (Weak Signal)";
+    }
+
+    // ---- Vendor category helpers ----
+    bool isLikelyLaptopVendor(const String& vendor) const {
+        return vendor == "Dell" || vendor == "Microsoft" || vendor == "HP" || vendor == "ASUS" || vendor == "Intel";
+    }
+
+    bool isLikelyNetworkInfraVendor(const String& vendor) const {
+        return vendor == "Cisco" || vendor == "Cisco-Linksys" || vendor == "Cisco SPVTG" ||
+               vendor == "TP-Link" || vendor == "D-Link" || vendor == "Sagemcom" || vendor == "Hitron" ||
+               vendor == "MilesightRouter" || vendor == "MaxLinear";
+    }
+
+    bool isLikelyPhoneVendor(const String& vendor) const {
+        return vendor == "Samsung" || vendor == "OnePlus" || vendor == "Xiaomi" ||
+               vendor == "OPPO" || vendor == "ZTE" || vendor == "HTC" || vendor == "BlackBerry";
+    }
+
+    bool isLikelyIoTVendor(const String& vendor) const {
+        return vendor == "Raspberry Pi" || vendor == "AnkerEufy" ||
+               vendor == "TexasInstruments" || vendor == "Murata" ||
+               vendor == "AzureWave" || vendor == "TRENDnet";
+    }
+
+    // ---- Utilities ----
+    String normalizeMac(String mac) const {
+        mac.trim();
+        mac.toUpperCase();
+        mac.replace("-", ":");
+        return mac;
+    }
+
+    String normalizePrefix(String p) const {
+        p.trim();
+        p.toUpperCase();
+        p.replace("-", ":");
+        return p;
+    }
+
+    String trimVendor(String v) const {
+        v.trim();  // removes your leading " HP" or trailing "AnkerEufy "
+        return v;
+    }
+
     int getMacSuffix(const String& mac) const {
-        // Get last few digits of MAC address as feature
-        String lastPart = mac.substring(15);
+        String norm = normalizeMac(mac);
+        if (norm.length() < 17) return 0;
+        String lastPart = norm.substring(15); // last byte (2 hex chars)
         return (int)strtol(lastPart.c_str(), NULL, 16);
     }
 };
