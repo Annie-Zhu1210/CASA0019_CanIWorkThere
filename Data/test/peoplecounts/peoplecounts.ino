@@ -12,9 +12,8 @@ private:
         {"DC:A6:32", "Raspberry Pi"}, // Raspberry Pi
         {"B8:27:EB", "Raspberry Pi"},
         {"00:50:F1", "MaxLinear"},         // the Ethernet interface-dock/gateway/router
-        {"00:1A:11", "Google"},       // Google devices
         {"38:F9:D3", "Apple"},
-        {"44:07:0B", "Googlei"},       
+        {"44:07:0B", "Google"},       
         {"AC:BC:32", "Apple"},      // Apple
         {"34:BB:1F", "BlackBerry"},    // BlackBerry
         {"98:0C:82", "Samsung"},         // Samsung
