@@ -6,21 +6,21 @@ class DeviceTypeDetector {
 private:
     // MAC address vendor prefix database (partial)
     std::map<String, String> macVendors = {
-        {"A8:5B:F7", "Apple"},        // Apple devices
-        {"24:E1:24", "Apple"},        // Apple devices  
-        {"8C:85:80", "Apple"},
+        {"A8:5B:F7", " HP"},        
+        {"24:E1:24", " MilesightRouter"},        // Xiamen Milesight IoT Co, Ltd Router
+        {"8C:85:80", "AnkerEufy "},     // smart-home devices
         {"DC:A6:32", "Raspberry Pi"}, // Raspberry Pi
         {"B8:27:EB", "Raspberry Pi"},
-        {"00:50:F1", "Dell"},         // Dell computers
+        {"00:50:F1", "MaxLinear"},         // the Ethernet interface-dock/gateway/router
         {"00:1A:11", "Google"},       // Google devices
-        {"38:F9:D3", "Google"},
-        {"44:07:0B", "Huawei"},       // Huawei
-        {"AC:BC:32", "Samsung"},      // Samsung
-        {"34:BB:1F", "Microsoft"},    // Microsoft
-        {"98:0C:82", "Sony"},         // Sony
+        {"38:F9:D3", "Apple"},
+        {"44:07:0B", "Googlei"},       
+        {"AC:BC:32", "Apple"},      // Apple
+        {"34:BB:1F", "BlackBerry"},    // BlackBerry
+        {"98:0C:82", "Samsung"},         // Samsung
         {"C0:EE:FB", "OnePlus"},      // OnePlus
         {"14:F6:5A", "Xiaomi"},       // Xiaomi
-        {"08:EE:8B", "Netgear"}       // Router
+        {"08:EE:8B", "Samsung"}       
     };
 
 public:
