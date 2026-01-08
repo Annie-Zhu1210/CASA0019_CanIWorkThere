@@ -6,77 +6,408 @@ class DeviceTypeDetector {
 private:
     // MAC address vendor prefix database (partial)
     std::map<String, String> macVendors = {
-        {"A8:5B:F7", "Apple"},        // Apple devices
-        {"24:E1:24", "Apple"},        // Apple devices  
-        {"8C:85:80", "Apple"},
+        {"A8:5B:F7", " HP"},        
+        {"24:E1:24", " MilesightRouter"},        // Xiamen Milesight IoT Co, Ltd Router
+        {"8C:85:80", "AnkerEufy "},     // smart-home devices
         {"DC:A6:32", "Raspberry Pi"}, // Raspberry Pi
         {"B8:27:EB", "Raspberry Pi"},
-        {"00:50:F1", "Dell"},         // Dell computers
-        {"00:1A:11", "Google"},       // Google devices
-        {"38:F9:D3", "Google"},
-        {"44:07:0B", "Huawei"},       // Huawei
-        {"AC:BC:32", "Samsung"},      // Samsung
-        {"34:BB:1F", "Microsoft"},    // Microsoft
-        {"98:0C:82", "Sony"},         // Sony
+        {"00:50:F1", "MaxLinear"},         // the Ethernet interface-dock/gateway/router
+        {"38:F9:D3", "Apple"},
+        {"44:07:0B", "Google"},       
+        {"AC:BC:32", "Apple"},      // Apple
+        {"F0:EE:7A", "Apple"},      // Apple
+        {"34:BB:1F", "BlackBerry"},    // BlackBerry
+        {"98:0C:82", "Samsung"},         // Samsung
         {"C0:EE:FB", "OnePlus"},      // OnePlus
+        {"AC:C0:48", "OnePlus"},      // OnePlus
         {"14:F6:5A", "Xiaomi"},       // Xiaomi
-        {"08:EE:8B", "Netgear"}       // Router
+        {"CC:EB:5E", "Xiaomi"}, 
+        {"08:EE:8B", "Samsung"},
+        {"40:F3:B0", "TexasInstruments"},
+        {"80:C4:1B", "TexasInstruments"},
+        {"34:68:B5", "TexasInstruments"},
+        {"E4:40:97", "ZTE"},
+        {"DC:B4:CA", "ZTE"},
+        {"88:7B:2C", "ZTE"},
+        {"F4:3A:7B", "OPPO"},
+        {"68:9E:29", "OPPO"},
+        {"58:AD:12", "Apple"},
+        {"60:FD:A6", "Apple"},
+        {"80:A9:97", "Apple"},
+        {"34:8C:5E", "Apple"},
+        {"20:15:82", "Apple"},
+        {"40:92:1A", "Apple"},
+        {"10:E2:C9", "Apple"},
+
+
+        // Dell OUIs (sorted)
+        {"00:0B:DB", "Dell"},
+        {"00:12:3F", "Dell"},
+        {"00:1C:23", "Dell"},
+        {"04:BF:1B", "Dell"},
+        {"14:FE:B5", "Dell"},
+        {"18:03:73", "Dell"},
+        {"18:5A:58", "Dell"},
+        {"20:47:47", "Dell"},
+        {"4C:D9:8F", "Dell"},
+        {"54:BF:64", "Dell"},
+        {"6C:2B:59", "Dell"},
+        {"74:86:7A", "Dell"},
+        {"78:2B:CB", "Dell"},
+        {"80:18:44", "Dell"},
+        {"84:7B:EB", "Dell"},
+        {"98:40:BB", "Dell"},
+        {"98:90:96", "Dell"},
+        {"98:E7:43", "Dell"},
+        {"A4:1F:72", "Dell"},
+        {"B4:45:06", "Dell"},
+        {"C8:F7:50", "Dell"},
+        {"CC:C5:E5", "Dell"},
+        {"D0:8E:79", "Dell"},
+        {"D4:81:D7", "Dell"},
+        {"DC:F4:01", "Dell"},
+        {"E0:D8:48", "Dell"},
+        {"D0:43:1E", "Dell"},
+        {"00:C0:4F", "Dell"},
+        {"00:B0:D0", "Dell"},
+        {"00:19:B9", "Dell"},
+        {"00:1A:A0", "Dell"},
+        {"00:25:64", "Dell"},
+        {"A4:BA:DB", "Dell"},
+
+        {"54:44:3B", "HUAWEI"},
+        {"48:AD:08", "HUAWEI"},
+        {"5C:70:75", "HUAWEI"},
+        {"D8:DA:F1", "HUAWEI"},
+        {"2C:AB:00", "HUAWEI"},
+        {"00:E0:FC", "HUAWEI"},
+        {"24:DF:6A", "HUAWEI"},
+        {"00:9A:CD", "HUAWEI"},
+        {"80:38:BC", "HUAWEI"},
+        {"D4:40:F0", "HUAWEI"},
+        {"64:A6:51", "HUAWEI"},
+        {"E8:CD:2D", "HUAWEI"},
+        {"AC:E2:15", "HUAWEI"},
+        {"EC:23:3D", "HUAWEI"},
+        {"78:F5:FD", "HUAWEI"},
+        {"80:B6:86", "HUAWEI"},
+        {"10:C6:1F", "HUAWEI"},
+        {"88:53:D4", "HUAWEI"},
+        {"0C:37:DC", "HUAWEI"},
+        {"BC:76:70", "HUAWEI"},
+        {"24:DB:AC", "HUAWEI"},
+        {"0C:45:BA", "HUAWEI"},
+        {"CC:A2:23", "HUAWEI"},
+        {"E8:08:8B", "HUAWEI"},
+        {"60:E7:01", "HUAWEI"},
+        {"AC:85:3D", "HUAWEI"},
+        {"74:88:2A", "HUAWEI"},
+        {"78:D7:52", "HUAWEI"},
+        {"E0:24:7F", "HUAWEI"},
+        {"00:46:4B", "HUAWEI"},
+        {"70:7B:E8", "HUAWEI"},
+        {"54:89:98", "HUAWEI"},
+        {"08:19:A6", "HUAWEI"},
+        {"3C:F8:08", "HUAWEI"},
+        {"B4:15:13", "HUAWEI"},
+        {"28:31:52", "HUAWEI"},
+        {"DC:D2:FC", "HUAWEI"},
+        {"28:5F:DB", "HUAWEI"},
+        {"40:4D:8E", "HUAWEI"},
+        {"78:1D:BA", "HUAWEI"},
+        {"00:1E:10", "HUAWEI"},
+        {"D0:3E:5C", "HUAWEI"},
+        {"F8:98:B9", "HUAWEI"},
+        {"2C:CF:58", "HUAWEI"},
+        {"E4:C2:D1", "HUAWEI"},
+        {"40:D4:F6", "HUAWEI"},
+        {"24:4B:F1", "HUAWEI"},
+        {"00:E0:18", "ASUS"},
+        {"00:0C:6E", "ASUS"},
+        {"00:1B:FC", "ASUS"},
+        {"00:1E:8C", "ASUS"},
+        {"00:15:F2", "ASUS"},
+        {"00:23:54", "ASUS"},
+        {"00:1F:C6", "ASUS"},
+        {"F8:32:E4", "ASUS"},
+        {"38:F2:3E", "Microsoft"},
+        {"50:FE:0C", "AzureWave"},
+        {"74:A7:8E", "ZTE"},
+        {"C4:EB:FF", "ZTE"},
+        {"20:3A:EB", "ZTE"},
+        {"84:74:2A", "ZTE"},
+        {"68:1A:B2", "ZTE"},
+        {"DC:51:93", "ZTE"},
+        {"F4:2E:48", "ZTE"},
+        {"80:7A:BF", "HTC"},
+        {"90:E7:C4", "HTC"},
+        {"7C:61:93", "HTC"},
+        {"3C:D9:2B", "HP"},
+        {"9C:8E:99", "HP"},
+        {"B4:99:BA", "HP"},
+        {"1C:C1:DE", "HP"},
+        {"F4:CE:46", "HP"},
+        {"00:1C:C4", "HP"},
+        {"00:25:B3", "HP"},
+        {"00:18:71", "HP"},
+        {"00:0B:CD", "HP"},
+        {"00:0E:7F", "HP"},
+        {"00:0F:20", "HP"},
+        {"00:11:0A", "HP"},
+        {"00:13:21", "HP"},
+        {"00:16:35", "HP"},
+        {"00:17:A4", "HP"},
+        {"00:08:02", "HP"},
+        {"00:08:83", "HP"},
+        {"C4:34:6B", "HP"},
+        {"8C:DC:D4", "HP"},
+        {"34:64:A9", "HP"},
+        {"D4:C9:EF", "HP"},
+        {"A4:5D:36", "HP"},
+        {"A0:D3:C1", "HP"},
+        {"40:A8:F0", "HP"},
+        {"6C:3B:E5", "HP"},
+        {"08:2E:5F", "HP"},
+        {"28:92:4A", "HP"},
+        {"10:60:4B", "HP"},
+        {"30:8D:99", "HP"},
+        {"00:30:C1", "HP"},
+        {"FC:3F:DB", "HP"},
+        {"00:03:47", "Intel"},
+        {"00:11:75", "Intel"},
+        {"00:13:E8", "Intel"},
+        {"00:13:02", "Intel"},
+        {"E4:F8:9C", "Intel"},
+        {"A4:02:B9", "Intel"},
+        {"4C:34:88", "Intel"},
+        {"E0:05:C5", "TP-Link"},
+        {"A0:F3:C1", "TP-Link"},
+        {"8C:21:0A", "TP-Link"},
+        {"EC:17:2F", "TP-Link"},
+        {"EC:88:8F", "TP-Link"},
+        {"14:CF:92", "TP-Link"},
+        {"64:56:01", "TP-Link"},
+        {"14:CC:20", "TP-Link"},
+        {"BC:46:99", "TP-Link"},
+        {"68:DD:B7", "TP-Link"},
+        {"14:D8:64", "TP-Link"},
+        {"B8:51:A9", "Nokia"},
+        {"3C:5A:B4", "Google"},
+        {"00:1A:11", "Google"},
+        {"00:50:BA", "D-Link"},
+        {"00:17:9A", "D-Link"},
+        {"1C:BD:B9", "D-Link"},
+        {"90:94:E4", "D-Link"},
+        {"28:10:7B", "D-Link"},
+        {"1C:7E:E5", "D-Link"},
+        {"C4:A8:1D", "D-Link"},
+        {"00:12:17", "Cisco-Linksys"},
+        {"00:0C:41", "Cisco-Linksys"},
+        {"00:0F:66", "Cisco-Linksys"},
+        {"CC:46:D6", "Cisco"},
+        {"48:1B:A4", "Cisco"},
+        {"58:AC:78", "Cisco"},
+        {"00:10:7B", "Cisco"},
+        {"00:90:6D", "Cisco"},
+        {"00:90:BF", "Cisco"},
+        {"00:50:80", "Cisco"},
+        {"F4:CF:E2", "Cisco"},
+        {"50:1C:BF", "Cisco"},
+        {"88:F0:31", "Cisco"},
+        {"50:87:89", "Cisco"},
+        {"38:1C:1A", "Cisco"},
+        {"F4:0F:1B", "Cisco"},
+        {"BC:67:1C", "Cisco"},
+        {"A0:EC:F9", "Cisco"},
+        {"D4:6D:50", "Cisco"},
+        {"1C:E8:5D", "Cisco"},
+        {"C4:72:95", "Cisco"},
+        {"A0:55:4F", "Cisco"},
+        {"84:B8:02", "Cisco"},
+        {"BC:C4:93", "Cisco"},
+        {"F2:29:29", "Cisco"},
+        {"EC:E1:A9", "Cisco"},
+        {"7C:69:F6", "Cisco"},
+        {"C0:8C:60", "Cisco"},
+        {"C0:25:5C", "Cisco"},
+        {"88:5A:92", "Cisco"},
+        {"E4:C7:22", "Cisco"},
+        {"C0:7B:BC", "Cisco"},
+        {"00:90:F2", "Cisco"},
+        {"00:17:3B", "Cisco"},
+        {"00:40:0B", "Cisco"},
+        {"00:60:09", "Cisco"},
+        {"00:60:47", "Cisco"},
+        {"00:06:C1", "Cisco"},
+        {"00:E0:14", "Cisco"},
+        {"00:E0:1E", "Cisco"},
+        {"AC:F2:C5", "Cisco"},
+        {"00:10:FF", "Cisco"},
+        {"34:BD:C8", "Cisco"},
+        {"54:A2:74", "Cisco"},
+        {"58:97:BD", "Cisco"},
+        {"04:6C:9D", "Cisco"},
+        {"78:D6:B2", "Toshiba"},
+        {"00:0D:0B", "Buffalo"},
+        {"00:07:40", "Buffalo"},
+        {"00:24:A5", "Buffalo"},
+        {"DC:FB:02", "Buffalo"},
+        {"18:62:2C", "Sagemcom"},
+        {"7C:03:D8", "Sagemcom"},
+        {"E8:F1:B0", "Sagemcom"},
+        {"34:8A:AE", "Sagemcom"},
+        {"00:21:E8", "Murata"},
+        {"00:60:57", "Murata"},
+        {"00:07:D8", "Hitron"},
+        {"90:7F:61", "Chicony"},
+        {"40:9F:87", "Jide"},
+        {"D8:3C:69", "Tinno"},
+        {"74:AC:5F", "Qiku"},
+        {"00:6B:8E", "Shanghai Feixun"},
+        {"00:03:DD", "Comark"},
+        {"3C:8C:F8", "TRENDnet"},
+        {"44:E0:8E", "Cisco SPVTG"},
+        {"18:59:33", "Cisco SPVTG"},
+        {"E4:48:C7", "Cisco SPVTG"},
+        {"24:76:7D", "Cisco SPVTG"},
+        {"2C:AB:A4", "Cisco SPVTG"},
+        {"00:19:47", "Cisco SPVTG"},
+        {"00:22:CE", "Cisco SPVTG"},
+        {"F4:4B:2A", "Cisco SPVTG"}
     };
 
 public:
     String detectDeviceType(const String& mac, int rssi) const {
         String vendor = getVendorFromMAC(mac);
-        
+
+        // Apple: keep your existing custom logic
         if (vendor == "Apple") {
-            // Apple devices could be iPhone, MacBook, iPad, etc.
             return guessAppleDeviceType(mac, rssi);
-        } else if (vendor != "Unknown") {
+        }
+
+        // Huawei: phone vs laptop/tablet heuristic
+        if (vendor == "HUAWEI") {
+            return guessHuaweiDeviceType(mac, rssi);
+        }
+
+        // Laptops/PCs “normally”
+        if (isLikelyLaptopVendor(vendor)) {
+            return vendor + " Laptop/PC";
+        }
+
+        // Routers/APs/gateways
+        if (isLikelyNetworkInfraVendor(vendor)) {
+            return vendor + " Router/AP";
+        }
+
+        // Android phone brands
+        if (isLikelyPhoneVendor(vendor)) {
+            return vendor + " Phone";
+        }
+
+        // IoT/embedded/modules
+        if (isLikelyIoTVendor(vendor)) {
+            return vendor + " IoT/Embedded";
+        }
+
+        if (vendor != "Unknown") {
             return vendor + " Device";
         }
-        
-        // Guess based on signal characteristics
+
         return guessBySignalCharacteristics(mac, rssi);
     }
 
     String getVendorFromMAC(const String& mac) const {
-        String prefix = mac.substring(0, 8);
-        for (const auto& vendor : macVendors) {
-            if (prefix.startsWith(vendor.first)) {
-                return vendor.second;
+        String norm = normalizeMac(mac);
+        if (norm.length() < 8) return "Unknown";
+
+        String prefix = norm.substring(0, 8); // "AA:BB:CC"
+
+        // Fast exact lookup (recommended)
+        auto it = macVendors.find(prefix);
+        if (it != macVendors.end()) return trimVendor(it->second);
+
+        // Fallback scan (still works if you later change container/keys)
+        for (const auto& kv : macVendors) {
+            if (prefix == normalizePrefix(kv.first)) {
+                return trimVendor(kv.second);
             }
         }
         return "Unknown";
     }
 
+    // keep public if EnhancedPeopleCounter wants to call it
     String guessAppleDeviceType(const String& mac, int rssi) const {
-        // Simple classification logic for Apple devices
         int macSuffix = getMacSuffix(mac);
-        
-        // iPhones typically have stronger mobility characteristics
-        if (rssi > -45 && macSuffix % 2 == 0) {
-            return "Apple iPhone";
-        } else if (rssi > -50) {
-            return "Apple MacBook";
-        } else {
-            return "Apple Device";
-        }
-    }
 
-    String guessBySignalCharacteristics(const String& mac, int rssi) const {
-        // Guess based on signal characteristics
-        if (rssi > -40) {
-            return "Likely Computer (Strong Signal)";
-        } else if (rssi > -55) {
-            return "Possible Phone (Medium Signal)";
-        } else {
-            return "Mobile Device (Weak Signal)";
-        }
+        if (rssi > -45 && macSuffix % 2 == 0) return "Apple iPhone";
+        if (rssi > -50) return "Apple MacBook";
+        return "Apple Device";
     }
 
 private:
+    // ---- New Huawei logic ----
+    String guessHuaweiDeviceType(const String& mac, int rssi) const {
+        // Very approximate. Tune thresholds for your room.
+        if (rssi > -45) return "HUAWEI Phone (near)";
+        if (rssi > -55) return "HUAWEI Phone (likely)";
+        if (rssi > -65) return "HUAWEI Laptop/Tablet (possible)";
+        return "HUAWEI Device";
+    }
+
+    // ---- Existing fallback ----
+    String guessBySignalCharacteristics(const String& mac, int rssi) const {
+        if (rssi > -40) return "Likely Computer (Strong Signal)";
+        if (rssi > -55) return "Possible Phone (Medium Signal)";
+        return "Mobile Device (Weak Signal)";
+    }
+
+    // ---- Vendor category helpers ----
+    bool isLikelyLaptopVendor(const String& vendor) const {
+        return vendor == "Dell" || vendor == "Microsoft" || vendor == "HP" || vendor == "ASUS" || vendor == "Intel";
+    }
+
+    bool isLikelyNetworkInfraVendor(const String& vendor) const {
+        return vendor == "Cisco" || vendor == "Cisco-Linksys" || vendor == "Cisco SPVTG" ||
+               vendor == "TP-Link" || vendor == "D-Link" || vendor == "Sagemcom" || vendor == "Hitron" ||
+               vendor == "MilesightRouter" || vendor == "MaxLinear";
+    }
+
+    bool isLikelyPhoneVendor(const String& vendor) const {
+        return vendor == "Samsung" || vendor == "OnePlus" || vendor == "Xiaomi" ||
+               vendor == "OPPO" || vendor == "ZTE" || vendor == "HTC" || vendor == "BlackBerry";
+    }
+
+    bool isLikelyIoTVendor(const String& vendor) const {
+        return vendor == "Raspberry Pi" || vendor == "AnkerEufy" ||
+               vendor == "TexasInstruments" || vendor == "Murata" ||
+               vendor == "AzureWave" || vendor == "TRENDnet";
+    }
+
+    // ---- Utilities ----
+    String normalizeMac(String mac) const {
+        mac.trim();
+        mac.toUpperCase();
+        mac.replace("-", ":");
+        return mac;
+    }
+
+    String normalizePrefix(String p) const {
+        p.trim();
+        p.toUpperCase();
+        p.replace("-", ":");
+        return p;
+    }
+
+    String trimVendor(String v) const {
+        v.trim();  // removes your leading " HP" or trailing "AnkerEufy "
+        return v;
+    }
+
     int getMacSuffix(const String& mac) const {
-        // Get last few digits of MAC address as feature
-        String lastPart = mac.substring(15);
+        String norm = normalizeMac(mac);
+        if (norm.length() < 17) return 0;
+        String lastPart = norm.substring(15); // last byte (2 hex chars)
         return (int)strtol(lastPart.c_str(), NULL, 16);
     }
 };

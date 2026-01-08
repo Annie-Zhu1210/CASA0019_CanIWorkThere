@@ -36,7 +36,6 @@ const char* ntpServer = "pool.ntp.org";
 // --- Global variables ---
 int globalPeopleCount = 0;
 int globalTargetRSSI = -100;
-// 【新增】定义全局变量存储设备数量
 int globalComputerCount = 0;
 int globalPhoneCount = 0;
 
