@@ -1,5 +1,22 @@
 # Can I Work There?
 
+## Prerequisites
+
+### Unity Development Environment
+| Component | Version / Details |
+| :--- | :--- |
+| **Engine** | Unity 6000.0.62f1 |
+| **AR Core** | AR Foundation, AR Subsystems, ARCore XR Plugin |
+| **Tools** | XR Interaction Toolkit, Mobile AR Template Assets |
+| **Plugins** | M2MQTT, XCharts, TextMesh Pro, Lean Touch |
+
+### Arduino Embedded System
+| Component | Details |
+| :--- | :--- |
+| **IDE** | Arduino IDE 2.3.6 |
+| **Network** | `WiFiNINA`, `WiFi`, `PubSubClient` |
+| **Hardware** | `Servo`, `Adafruit_NeoPixel` |
+| **Utils** | `ArduinoJson`, `vector`, `map`, `time.h`, `soc.h` |
 
 ## 1. Project Overview
 
