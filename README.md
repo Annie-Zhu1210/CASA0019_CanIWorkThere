@@ -187,9 +187,8 @@ To support both immediate awareness and longer-term understanding, the system pr
 
 As the sensing device does not currently implement local data storage, the 24-hour view uses simulated data to demonstrate full system functionality and visual behaviour.
 
-<figure style=" text-align: center; margin:  0 10px 10px; width: 160px;">
+<figure style=" margin:  0 10px 10px; width: 160px;">
   <img src="/Media/Images/quadrant-based.png" align="right" width="300" alt="Quadrant Model" />
-  <figcaption style="font-size: 12px; color: black;"><p><em>Figure9: Quadrant based</em></p></figcaption>
 </figure>
 
 #### 5.4.2 Quadrant-Based Environmental Classification
