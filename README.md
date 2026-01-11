@@ -43,7 +43,7 @@ The system simultaneously monitors sound environments and wireless network stren
 
 <div align="center">
   <img src="/Media/Images/Circuit.JPG" width="95%" alt="Gauge box circuit connection" />
-  <p><em>Figure1: Gauge box and sensor box circuit schematic</em></p>
+  <p><em>Figure1. Gauge box and sensor box circuit schematic</em></p>
 </div>
 
 ## 3.2 Data Integrating and Signal Processing
@@ -52,7 +52,7 @@ The system simultaneously monitors sound environments and wireless network stren
 
 The system uses a **MAX9814** sound sensor that does high frequency sampling (all 50ms). In order to extract stable background noise from transient acoustic impulses, such as the dropping of a pen, or transient mechanical vibrations, the following signal conditioning techniques are used:
 
-* **Hardware Gain Configuration**: To optimize sensitivity for quiet environments like libraries, the sensor is configured with a **60dB gain**. The resulting analog signals are mapped to a calibrated decibel range of **30dB to 90dB**.
+* **Hardware Gain Configuration**: To optimise sensitivity for quiet environments like libraries, the sensor is configured with a **60dB gain**. The resulting analog signals are mapped to a calibrated decibel range of **30dB to 90dB**.
 * **Time-Window Averaging**: A rolling average is calculated every 5 seconds over approximately 100 samples to ensure data stability and suppress outliers. The processing follows the formula:
   * $vg = \frac{\sum_{i=1}^{n} \text{dB}_i}{n}$
 * **Environmental Benchmarking**: The system is based on research by Mehta, Zhu, and Cheema (2012) that evaluates the "Golden Noise Range." While levels around 70dB can help you be creative, noise levels over 85dB, when sustained over time, greatly degrade your ability to focus on cognitive tasks. Our system assists in helping the user determine the best balance for productivity.
@@ -70,7 +70,7 @@ Apart from acoustic information, the ESP32 also periodically performs network sc
 
 The processed noise data is translated into physical feedback via a servo-driven pointer mechanism. The `updateServo` function manages this transition through specific mapping and mechanical compensation:
 
-1. **Normalisation**: The filtered sound data (30dB–90dB) is firstly normalized into a linear progress percentage (0.0 to 1.0):
+1. **Normalisation**: The filtered sound data (30dB–90dB) is firstly normalised into a linear progress percentage (0.0 to 1.0):
    * $\text{progress} = \frac{\text{safeDB} - 30.0}{60.0}$
 2. **Angular Mapping**: This percentage is mapped across the **270-degree physical dial**.
 3. **Mechanical Gear Compensation**: Since the servo is coupled to the pointer via a gear train with a **14:30 ratio**, the software applies a compensatory adjustment to the rotation angle:
@@ -108,9 +108,9 @@ The class `BehaviorAnalyzer` defines an object `SignalBehavior` with mac, `minRS
 Then `EnhancedPeopleCounter` and `BehavioralAnalyzer` are initiated as `peopleCounter` and `behaviorAnalyzer` and the `peopleCounter.analyzeDevices` is called in loop for detecting each device for our dashboard. 
 ### 3.2.5 Connectivity and Data Transmission
 
-Every 5 seconds, the system encapsulates the processed environmental metrics into a standardized **JSON payload** for transmission via the **MQTT protocol**.
+Every 5 seconds, the system encapsulates the processed environmental metrics into a standardised **JSON payload** for transmission via the **MQTT protocol**.
 
-* **NTP Temporal Synchronization**: As the ESP32 lacks a persistent internal clock, the system synchronizes with an **NTP (Network Time Protocol)** server. This ensures that every data point is accurately timestamped (e.g., `2023-11-15 14:05:01`), allowing for the analysis of long-term environmental trends.
+* **NTP Temporal Synchronisation**: As the ESP32 lacks a persistent internal clock, the system synchronises with an **NTP (Network Time Protocol)** server. This ensures that every data point is accurately timestamped (e.g., `2023-11-15 14:05:01`), allowing for the analysis of long-term environmental trends.
 * **Multidimensional Data Structure**: The telemetry package includes:
     * `sound_db`: The averaged noise level.
     * `wifi_rssi`: The network signal strength.
@@ -131,27 +131,27 @@ Every 5 seconds, the system encapsulates the processed environmental metrics int
 ```
 
 ## 4. Enclosure Design
-The gauge enclosure is using the **round corner** which ensures **safety and comfort** for people, **strength and durability** by spreading the load, adding **suitability for molding** for plastics because fillets help plastic flow smoothly, reduce weld lines, and avoid thick/thin transitions. Although it was **3D printed with PLA**, it can also be manufactured with plastic molding for future large-scale producing. Round corners are also a **visual signal of friendliness and approachability**. There are custom-designed internal mounting enclosures integrated into the gauge housing for the servo, gears, and the MKR1010 board. A 32mm diameter gear is mounted on the servo, which meshes with a 16mm gear at the center of the dial, effectively increasing the servo's rotation range.
+The gauge enclosure is using the **round corner** which ensures **safety and comfort** for people, **strength and durability** by spreading the load, adding **suitability for molding** for plastics because fillets help plastic flow smoothly, reduce weld lines, and avoid thick/thin transitions. Although it was **3D printed with PLA**, it can also be manufactured with plastic molding for future large-scale producing. Round corners are also a **visual signal of friendliness and approachability**. There are custom-designed internal mounting enclosures integrated into the gauge housing for the servo, gears, and the MKR1010 board. A 32mm diameter gear is mounted on the servo, which meshes with a 16mm gear at the centre of the dial, effectively increasing the servo's rotation range.
 <div align="center">
   <img src="/Media/Images/3d%20model%20of%20the%20gauge%20model.png" width="70%" alt="3D model of the gauge enclosure" />
-  <p><em>Figure2: 3D model of the gauge box</em></p>
+  <p><em>Figure2. 3D model of the gauge box</em></p>
 </div>
 
 <div align="center">
   <img src="/Media/Images/render4views.png" width="70%" alt="3D model of the gauge enclosure" />
-  <p><em>Figure3: 3D model of the gauge box</em></p>
+  <p><em>Figure3. 3D model of the gauge box</em></p>
 </div>
 
-The noise level dial features a classic red-green color scheme. Within the 270-degree rotation range, the pointer rotates clockwise as noise levels increase. 
+The noise level dial features a classic red-green colour scheme. Within the 270-degree rotation range, the pointer rotates clockwise as noise levels increase. 
 <div align="center">
   <img src="/Media/Images/GaugeFront.jpg" width="40%" alt="Gauge dial" />
-  <p><em>Figure4: Guage presenting the real-time noise level with typical noise level conditions on the dial</em></p>
+  <p><em>Figure4. Gauge presenting the real-time noise level with typical noise level conditions on the dial</em></p>
 </div>
 
 The 3D printed sensor box was adapted from an open-source model available online (Moews, 2012). It consists of a decorative enclosure with a removable lid, featuring a hexagonal pattern. These perforations not only allow the power cable and sensor microphone to extend outward but also enhance the attractiveness and quality of the sensor box.
 <div align="center">
   <img src="/Media/Images/SensorBox.jpg" width="35%" alt="Sensor box" />
-  <p><em>Figure5: Sensor box</em></p>
+  <p><em>Figure5. Sensor box</em></p>
 </div>
 
 
@@ -159,7 +159,7 @@ The 3D printed sensor box was adapted from an open-source model available online
 
 <div align="center">
   <img src="/Media/Images/dashboardnew.png" width="100%" alt="Final Prototype" />
-  <p><em>Figure6: illustrates the entire digital twin system</em></p>
+  <p><em>Figure6. illustrates the entire digital twin system</em></p>
 </div>
 
 ### 5.1 AR Tracking and Spatial Anchoring
@@ -168,7 +168,7 @@ The system uses Unity’s *ARTrackedImageManager* to detect a printed physical m
 
 <div align="center">
   <img src="/Media/DigitalDesign/Gemini_Generated_Image.png" width="30%" alt="TargetCard" />
-  <p><em>Figure7: illustrates the target card generated by Gemini.</em></p>
+  <p><em>Figure7. illustrates the target card generated by Gemini.</em></p>
 </div>
 
 
@@ -188,7 +188,7 @@ The dashboard was implemented as a **modular UI structure**, allowing individual
 
 <div align="center">
   <img src="/Media/Images/layout.png" width="600%" alt="LayoutStructure" />
-  <p><em>Figure8: illustates the layout structure of dashboard .</em></p>
+  <p><em>Figure8. illustates the layout structure of dashboard .</em></p>
 </div>
 
 
