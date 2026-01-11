@@ -37,12 +37,28 @@ To add a screenshot, create an `assets/images` folder in your repository and upl
 
 ## Credits
 
-List all collaborators with links to their GitHub profiles.
+### Collaborators
+* [Annie Zhu](https://github.com/Annie-Zhu1210)
+* [Junrong Wang](https://github.com/JRONGW)
+* [Lizi Wang](https://github.com/Lizzim24)
+* [Xinyuan Sun](https://github.com/ChengJu1)
 
-If you used any third-party assets that require attribution, list the creators with links to their primary web presence in this section.
+### Third-Party Assets
 
-If you followed tutorials, include links to those here as well.
+**Box with Hexagonal Holes** by [Paul Moews](https://www.thingiverse.com/pmoews)  
+  Licensed under the [Creative Commons Attribution (CC BY) License](https://creativecommons.org/licenses/by/4.0/)  
+  Source: https://www.thingiverse.com/thing:21593  
+  The model was modified for this project.
+
+The following workshop materials by **CE Workshops CASA0019 - Sensor Data Visualisation** have been used:
+Source: https://workshops.cetools.org/casa0019/
+* [CASA0019 WorkShop02](https://workshops.cetools.org/codelabs/casa0019-02-unity-ar/index.html?index=..%2F..casa0019#0)
+* [CASA0019 WorkShop03](https://workshops.cetools.org/codelabs/casa0019-03-unity-dashboard/index.html?index=..%2F..casa0019#0)
+* [CASA0019 WorkShop06](https://workshops.cetools.org/codelabs/casa0019-06-unity-ar-pd/index.html?index=..%2F..casa0019#0)
+* [CASA0019 WorkShop07](https://workshops.cetools.org/codelabs/casa0019-07-unity-ar-dp/index.html?index=..%2F..casa0019#0)
+
+
 
 ## License
 
-The last section of a high-quality README file is the license. This lets other developers know what they can and cannot do with your project. If you need help choosing a license, refer to [https://choosealicense.com/](https://choosealicense.com/).
+This project is licensed under the MIT License.
