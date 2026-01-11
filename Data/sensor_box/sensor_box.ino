@@ -16,8 +16,8 @@ const char* internet_password = SECRET_PASS;
 const char* mqtt_server = "mqtt.cetools.org";
 const int   mqtt_port   = 1884;
 const char* mqtt_topic  = "student/group_laxr/json_data";
-const char* mqtt_user   = "student";
-const char* mqtt_pass   = "ce2021-mqtt-forget-whale";
+const char* mqtt_user   = SECRET_MQTT_USER;
+const char* mqtt_pass   = SECRET_MQTT_PASS;
 
 // 3. Target WiFi to Track
 const char* targetSSID = "eduroam";
