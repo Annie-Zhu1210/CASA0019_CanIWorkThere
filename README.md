@@ -120,7 +120,7 @@ Every 5 seconds, the system encapsulates the processed environmental metrics int
 ## 4. Enclosure Design
 The gauge enclosure is using the **round corner** which ensures **safety and comfort** for people, **strength and durability** by spreading the load, adding **suitability for molding** for plastics because fillets help plastic flow smoothly, reduce weld lines, and avoid thick/thin transitions. Although it was **3D printed with PLA**, it can also be manufactured with plastic molding for future large-scale producing. Round corners are also a **visual signal of friendliness and approachability**. There are custom-designed internal mounting enclosures integrated into the gauge housing for the servo, gears, and the MKR1010 board. A 32mm diameter gear is mounted on the servo, which meshes with a 16mm gear at the center of the dial, effectively increasing the servo's rotation range.
 <div align="center">
-  <img src="/Media/Images/3d_model_gauge.png" width="70%" alt="3D model of the gauge enclosure" />
+  <img src="/Media/Images/3d%20model%20of%20the%20gauge%20model.png" width="70%" alt="3D model of the gauge enclosure" />
   <p><em>Figure2: 3D model of the gauge box</em></p>
 </div>
 
@@ -137,7 +137,7 @@ The noise level dial features a classic red-green color scheme. Within the 270-d
 
 The 3D printed sensor box was adapted from an open-source model available online (Moews, 2012). It consists of a decorative enclosure with a removable lid, featuring a hexagonal pattern. These perforations not only allow the power cable and sensor microphone to extend outward but also enhance the attractiveness and quality of the sensor box.
 <div align="center">
-  <img src="./images/SensorBox.jpg" width="35%" alt="Sensor box" />
+  <img src="/Media/Images/SensorBox.jpg" width="35%" alt="Sensor box" />
   <p><em>Figure5: Sensor box</em></p>
 </div>
 
@@ -159,7 +159,7 @@ The system uses Unity’s *ARTrackedImageManager* to detect a printed physical m
 </div>
 
 
-<img src="Media/Images/MQTTBroker.jpg" align="right" width="130" alt="MQTT Broker" />
+<img src="Media/Images/MQTTBroker.png" align="right" width="130" alt="MQTT Broker" />
 
 ### 5.2 Real-Time Data Integration via MQTT
 
@@ -209,7 +209,7 @@ To bridge the gap between raw sensor data and user-facing interpretation, a ligh
 
 ## 6. How To Use
 
-<img src="/Media/Images/UIPhysical.jpg" align="right" width="200" alt="MQTT Broker" />
+<img src="/Media/Images/UIPhysical.png" align="right" width="200" alt="MQTT Broker" />
 
 1. **Prepare the Physical System**  
    Power on the sensing device and ensure that it is connected to the local network and publishing JSON-formatted data to the MQTT broker (`mqtt.cetools.org`).
