@@ -37,9 +37,7 @@ The system uses a **MAX9814** sound sensor that does high frequency sampling (al
 
 * **Hardware Gain Configuration**: To optimize sensitivity for quiet environments like libraries, the sensor is configured with a **60dB gain**. The resulting analog signals are mapped to a calibrated decibel range of **30dB to 90dB**.
 * **Time-Window Averaging**: A rolling average is calculated every 5 seconds over approximately 100 samples to ensure data stability and suppress outliers. The processing follows the formula:
-  $$
-  vg = \frac{\sum_{i=1}^{n} \text{dB}_i}{n}
-  $$
+  * $vg = \frac{\sum_{i=1}^{n} \text{dB}_i}{n}$
 * **Environmental Benchmarking**: The system is based on research by Mehta, Zhu, and Cheema (2012) that evaluates the "Golden Noise Range." While levels around 70dB can help you be creative, noise levels over 85dB, when sustained over time, greatly degrade your ability to focus on cognitive tasks. Our system assists in helping the user determine the best balance for productivity.
 
 ### 3.2.2 Wi-Fi Telemetry and Occupancy Inference
@@ -55,10 +53,8 @@ Apart from acoustic information, the ESP32 also periodically performs network sc
 
 The processed noise data is translated into physical feedback via a servo-driven pointer mechanism. The `updateServo` function manages this transition through specific mapping and mechanical compensation:
 
-1. **Normalization**: The filtered sound data (30dB–90dB) is firstly normalized into a linear progress percentage (0.0 to 1.0):
-   $$
-   \text{progress} = \frac{\text{safeDB} - 30.0}{60.0}
-   $$
+1. **Normalisation**: The filtered sound data (30dB–90dB) is firstly normalized into a linear progress percentage (0.0 to 1.0):
+   * $\text{progress} = \frac{\text{safeDB} - 30.0}{60.0}$
 2. **Angular Mapping**: This percentage is mapped across the **270-degree physical dial**.
 3. **Mechanical Gear Compensation**: Since the servo is coupled to the pointer via a gear train with a **14:30 ratio**, the software applies a compensatory adjustment to the rotation angle:
    * $\text{targetPointerAngle} = \text{progress} \times 270.0$
@@ -191,14 +187,14 @@ To support both immediate awareness and longer-term understanding, the system pr
 
 As the sensing device does not currently implement local data storage, the 24-hour view uses simulated data to demonstrate full system functionality and visual behaviour.
 
-<figure style="float: right; text-align: center; margin:  0 10px 10px; width: 160px;">
-  <img src="/Media/Images/quadrant-based.png" width="300" alt="Quadrant Model" />
-  <figcaption style="font-size: 12px; color: black;"><p><em>Figure9: Quadrant based</em></p></figcaption>
+<figure style=" margin:  0 10px 10px; width: 160px;">
+  <img src="/Media/Images/quadrant-based.png" align="right" width="300" alt="Quadrant Model" />
 </figure>
 
 #### 5.4.2 Quadrant-Based Environmental Classification
 
 To bridge the gap between raw sensor data and user-facing interpretation, a lightweight logic layer based on quadrant classification was introduced. The model combines ambient noise level and Wi-Fi signal strength to generate contextual, non-prescriptive recommendations. The active quadrant is highlighted through colour flash and textual prompts, enabling users to interpret environmental conditions within seconds.
+
 
 #### 5.4.2.1 Classification Thresholds
 * **Wi-Fi signal strength threshold:** –57 dBm
